@@ -43,6 +43,9 @@
         // Camera
         var camera = init_camera(scene);
         
+        var context = canvas.getContext('2d');
+
+        
         //camera.rotation.y = Math.PI/2;
         camera.attachControl(canvas);
         // Light
@@ -53,12 +56,10 @@
         var points = [
             new BABYLON.Vector3(0, 0, 0),
             new BABYLON.Vector3(2, 1, 1),
-            new BABYLON.Vector3(0, 2, 0),
-            new BABYLON.Vector3(1, 3, 1),
-            new BABYLON.Vector3(2, 4, 2)
+            new BABYLON.Vector3(0, 2, 0)
         ];
 
-        var pathVertexData = createPath(1, 1, 16, points, scene);
+        var pathVertexData = createPath(points, 0.5, 16, scene);
         for (var it = 0; it < pathVertexData.positions.length - 1; it+=3) {
             var sphere = BABYLON.Mesh.CreateSphere("sphere", 10, 0.1, scene);
             sphere.position = new BABYLON.Vector3(
@@ -73,8 +74,9 @@
         pathVertexData.applyToMesh(path);
         path.material = new BABYLON.StandardMaterial("material", scene);
         path.material.wireframe = true;
+        //~ path.isVisible = false;
         
-        var line = BABYLON.Mesh.CreateLines("line", points, scene);
+        //~ var line = BABYLON.Mesh.CreateLines("line", points, scene);
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
         // Once the scene is loaded, just register a render loop to render it
